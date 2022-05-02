@@ -72,7 +72,7 @@
         <a href="CreatePosts.html">Create Posts</a>
     </div>
     <?php
-        $mysqli = new mysqli("mysql.eecs.ku.edu", "linhnguyen", "aadaeR4k", "linhnguyen");
+        $mysqli = new mysqli("mysql.eecs.ku.edu", "l747n970", "aadaeR4k", "l747n970");
         
         /* Empty user_id */
         $user_id = $_POST['username'];
