@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Posts</title>
+    <title>Create New Orders</title>
     <style>
         body {font-family: Arial, Helvetica, sans-serif;}
         form {border: 3px solid #f1f1f1;}
@@ -69,7 +69,7 @@
 <body>
     <div class="topnav">
         <a href="CreateUser.html">Create User</a>
-        <a href="CreatePosts.html">Create Posts</a>
+        <a href="CreateNewOrders.html">Create New Orders</a>
     </div>
     <?php
         $mysqli = new mysqli("mysql.eecs.ku.edu", "linhnguyen", "aadaeR4k", "linhnguyen");
@@ -110,7 +110,7 @@
         // Error message function
         function error($msg) {
             ?>
-            <form method="GET" action="CreatePosts.html">
+            <form method="GET" action="CreateNewOrders.html">
                 <div class="container" style="background-color:#f1f1f1">
                     <span>Error: <?=$msg?></span>
                     <button class="cancelbtn" type="submits">Try again!</button>

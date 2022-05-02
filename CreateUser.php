@@ -96,14 +96,16 @@
                 // // Username is not taken
                 // else{
                     // Insert username into Users table
-                    
-                    $query = mysql_query("INSERT INTO USERS (UID)  VALUES ($user_id)");
-                    if (! $query) exit(mysql_error());
-                        echo mysql_error($query)
-                    // $query = $mysqli -> prepare("INSERT INTO USERS (UID)  VALUES ()");
-                    // $query -> bind_param("s", $user_id);
-                    // $query -> execute();
-                    // $query -> close();
+                    $sql = "INSERT INTO USERS (NAME) VALUES ('$user_id');";
+    if ($mysqli->query($sql) === TRUE)
+    {
+      echo "<p>User created successfully</p>";
+    }
+    else
+    {
+      echo "<p>Error, user not created. User already exists</p>";
+    } 
+
                     echo "<h1> User created successfully </h1>";
 
                 //}
