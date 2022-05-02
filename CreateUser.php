@@ -72,7 +72,7 @@
         <a href="CreatePosts.html">Create Posts</a>
     </div>
     <?php
-        $mysqli = new mysqli("mysql.eecs.ku.edu", "l747n970", "aadaeR4k", "l747n970");
+        $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
         
         /* Empty user_id */
         $user_id = $_POST['username'];
@@ -84,25 +84,31 @@
                 exit();
             }else{
                 // Get all users with the same username
-                $query = $mysqli -> prepare("SELECT count(*) FROM Users WHERE user_id = ?");
-                $query -> bind_param("s", $user_id);
-                $query -> execute();
-                // Get result to res
-                $query -> bind_result($res);
-                $query -> fetch();
-                $query -> close();
-                // Username is taken
-                if($res > 0) error("The user already exists");
-                // Username is not taken
-                else{
+                // $query = $mysqli -> prepare("SELECT count(*) FROM Users WHERE UID = ?");
+                // $query -> bind_param("s", $user_id);
+                // $query -> execute();
+                // // Get result to res
+                // $query -> bind_result($res);
+                // $query -> fetch();
+                // $query -> close();
+                // // Username is taken
+                // if($res > 0) error("The user already exists");
+                // // Username is not taken
+                // else{
                     // Insert username into Users table
-                    $query = $mysqli -> prepare("INSERT INTO Users (user_id)  VALUES (?)");
-                    $query -> bind_param("s", $user_id);
-                    $query -> execute();
-                    $query -> close();
+                    $sql = "INSERT INTO USERS (NAME) VALUES ('$user_id');";
+    if ($mysqli->query($sql) === TRUE)
+    {
+      echo "<p>User created successfully</p>";
+    }
+    else
+    {
+      echo "<p>Error, user not created. User already exists</p>";
+    } 
+
                     echo "<h1> User created successfully </h1>";
 
-                }
+                //}
                 $mysqli -> close();
             }
         }
