@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View User Posts</title>
+    <title>Dashboard</title>
     <style>
         body {
           margin: 0;
@@ -33,6 +33,11 @@
           background-color: #4CAF50;
           color: white;
         }
+
+        .product {
+          overflow: hidden;
+          text-align: center;
+        }
         </style>
 </head>
 <body>
@@ -40,8 +45,24 @@
         <a href="home.html">Home</a>
     </div>
     
-    <form action="ViewUserPosts.php" method="POST">
-        <label for="username">Choose User to view posts</label>
+    <form action="Dashboard.php" method="POST">
+      <div class="product">
+        <div>
+          <img src="img1.jpg">
+        </div>
+        <p>Product Name: Squishy Toys</p>
+        <p>Seller Name: Toy Co</p>
+        <p>Price: $10</p>  
+      </div>
+      <div class="product">
+        <div>
+          <img src="img1.jpg">
+        </div>
+        <p>Product Name: Squishy Toys</p>
+        <p>Seller Name: Toy Co</p>
+        <p>Price: $10</p>  
+      </div>
+        <!-- <label for="username">Choose User to view posts</label>
         <select name="username">
             <?php
                 $mysqli = new mysqli("mysql.eecs.ku.edu", "linhnguyen", "aadaeR4k", "linhnguyen");
@@ -60,8 +81,8 @@
                 }
                 $mysqli->close();
 			?>
-        </select>
-        <button type="submit">Submit</button>
+        </select> -->
+        <!-- <button type="submit">Submit</button> -->
     </form>
 </body>
 </html>
