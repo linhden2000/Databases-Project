@@ -75,7 +75,9 @@
         $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
         
         /* Empty user_id */
-        $user_id = $_POST['username'];
+	$user_id = $_POST['name'];
+	$email = $_POST['email'];
+	$pass = $_POST['password'];
         if($user_id == '') error("The user left the text field empty");
         else{
             /* Check connection*/
@@ -96,7 +98,7 @@
                 // // Username is not taken
                 // else{
                     // Insert username into Users table
-                    $sql = "INSERT INTO USERS (NAME) VALUES ('$user_id');";
+                    $sql = "INSERT INTO USERS (NAME, EMAIL, PASSWORD) VALUES ('$user_id', '$email', '$pass');";
     if ($mysqli->query($sql) === TRUE)
     {
       echo "<p>User created successfully</p>";
