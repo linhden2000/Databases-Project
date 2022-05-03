@@ -81,11 +81,14 @@
     </div>
     <?php
         $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
-        
+
         /* Empty user_id */
 	$user_id = $_POST['name'];
 	$email = $_POST['email'];
 	$pass = $_POST['password'];
+  $phonenum = $_POST['phonenum'];
+  $creditcard = $_POST['creditcard'];
+  $address = $_POST['address'];
         if($user_id == '') error("The user left the text field empty");
         else{
             /* Check connection*/
@@ -94,7 +97,7 @@
                 exit();
             }else{
                     // Insert username into Users table
-                    $sql = "INSERT INTO USERS (NAME, EMAIL, PASSWORD) VALUES ('$user_id', '$email', '$pass');";
+                    $sql = "INSERT INTO USERS (NAME, EMAIL, PASSWORD, PHONENUM, CREDITCARD, ADDRESS) VALUES ('$user_id', '$email', '$pass', '$phonenum', '$creditcard', '$address');";
     if ($mysqli->query($sql) === TRUE)
     {
       echo "<p>User created successfully</p>";
