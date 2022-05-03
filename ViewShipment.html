@@ -43,7 +43,7 @@
     </style>
 </head>
 <body>
-    <h1>Create Posts</h1>
+    <h1>View Current Shipments</h1>
     <form action="ViewShipment.php" method="POST">
         <div class="container">
             <label for="OID">Choose your Order ID</label>
@@ -51,7 +51,7 @@
                 <?php
                     $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m553s493");
                     if (!$mysqli->connect_errno) {
-                        $query = "SELECT OID FROM BUY ORDER BY OID ASC";
+                        $query = "SELECT OID FROM ORDERS ORDER BY OID ASC";
                         if ($result = $mysqli->query($query)) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "<option value=\"" . $row["OID"] . "\">" . $row["OID"] . "</option>";
