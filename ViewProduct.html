@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Products</title>
+</head>
+<body>
+    <h1>Products</h1>
+    <!-- <?php
+        $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m553s493");
+        if ($mysqli->connect_errno) {
+            printf("Connect failed: %s\n", $mysqli->connect_error);
+            exit(); 
+        }
+        else {
+            $sql = "SELECT PID, Name, Price, Quantity, Image FROM PRODUCTS ";
+            echo "Display admin's products";
+            if ($result = $mysqli -> query($sql)) {
+                echo "<table border='1'><tr><th>Product ID </th><th>Product Name</th></tr>";
+                while($row = $result -> fetch_assoc()) {
+                    echo "<tr><td>" . $row["PID"] . "</td><td>" . $row["Name"] . "</td></tr>";
+                }
+                echo "</table><br><br>"
+                $result -> free();
+            }
+        }
+        $mysqli->close();
+    ?>                    -->
+</body>
+</html>
