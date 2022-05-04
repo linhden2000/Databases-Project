@@ -6,38 +6,35 @@
     <title>View Shipment</title>
 </head>
 <body>
-    <?php
-        $user = $_POST["OID"];
-        $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m553s493");
-        // Check connection
-        echo "<h1>" . $user . "</h1>";
-        if($mysqli -> connect_errno){
-            printf("Connect failed: %s\n", $mysqli->connect_error);
-            exit();
+<?php
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
+  // Get product's information from the POST request
+  $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
+
+  // if ($product_name == '' || $price == '' || $quantity == '' || $image_URL == '') {
+  //   error('None of the field should be empty');
+  // }
+  if ($mysqli->connect_errno) {
+    printf("Connect failed: %s\n", $mysqli->connect_error);
+    exit();
+  }
+  // Insert product to the Products table
+  session_start();
+  $oid = $_POST['oid'];
+  $status= $_POST ['status'];
+    $sql = "UPDATE ORDERS SET STATUS='$status' WHERE OID=$oid";
+    if ($mysqli->query($sql) === TRUE) {
+        echo "<p>Order status has has been updated</p>";
+        } else {
+        echo "<p>Error, order status could not be changed</p>";
         }
-        else{
-            $data = "SELECT * FROM ORDERS WHERE OID='$user' ORDER BY OID;";
-            echo "Displaying all orders from user " . $user . "<br><br><br>";
-            if ($result = $mysqli->query($data))
-            {
-            echo "<table border='1'><tr><th>Order ID </th><th>Post </th></tr>";
-                while($row = $result->fetch_assoc())
-                {
-                    echo "<tr><td>" . $row["SHIPS.OID"] . "</td><td>" . $row["SHIPMENT.CARRIER"] . "</td></tr>";
-                }
-                echo "</table><br><br> ";
-                $result->free();
-            }
-            else
-            {
-                echo "No user found";
-            }
+  
+  $mysqli->close();
 
-            echo "<br><a href='AdminHome.html'>Back to Admin Home </a>";
+  ?>
+  <br><a href='Admin.html'>Back to Admin Home </a>
 
-            
-    }
-        $mysqli->close();
-    ?>
 </body>
 </html>
