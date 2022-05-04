@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -34,9 +34,22 @@
           color: white;
         }
 
-        .product {
+        .container {
           overflow: hidden;
           text-align: center;
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .product {
+            border: #333 1px solid;
+            margin: 2%;
+            width: 40%;
+        }
+        .product-img {
+            height: 20%;
+            width: 20%;
         }
         </style>
 </head>
@@ -44,45 +57,33 @@
     <div class="topnav">
         <a href="home.html">Home</a>
     </div>
-
-    <form action="Dashboard.php" method="POST">
-      <div class="product">
-        <div>
-          <img src="img1.jpg">
-        </div>
-        <p>Product Name: Squishy Toys</p>
-        <p>Seller Name: Toy Co</p>
-        <p>Price: $10</p>
-      </div>
-      <div class="product">
-        <div>
-          <img src="img1.jpg">
-        </div>
-        <p>Product Name: Squishy Toys</p>
-        <p>Seller Name: Toy Co</p>
-        <p>Price: $10</p>
-      </div>
-        <label for="username">Choose User to view posts</label>
-        <select name="username">
-            <?php
-                $mysqli = new mysqli("mysql.eecs.ku.edu", "linhnguyen", "aadaeR4k", "linhnguyen");
-				if (!$mysqli->connect_errno) {
-				    $query = "SELECT user_id FROM Users ORDER BY user_id ASC";
-					if ($result = $mysqli->query($query)) {
-						while ($row = $result->fetch_assoc()) {
-							echo "<option value=\"" . $row["user_id"] . "\">" . $row["user_id"] . "</option>";
-						}
-						$result->free();
-					}
+    <h1>Available Products</h1>
+    <?php 
+            $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493"); 
+            $query = "SELECT PID, NAME, PRICE, QUANTITY, IMAGE FROM PRODUCTS ORDER BY PID ";
+            if(!$mysqli->connect_errno) {
+                if ($result = $mysqli->query($query)) {
+                    echo "<div class='container'>";
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<div class='product'>";
+                        echo "<img class='product-img' src='". $row["IMAGE"] ."'/>";
+                        echo "
+                        <p> Product ID: " . $row["PID"] . "</p>
+                        <p> Name: " . $row["NAME"] . "</p>
+                        <p>Quantity: ". $row["QUANTITY"] ."</p>
+                        <p>Price: $". $row["PRICE"] ."</p>";
+                        echo "</div>";
+                    }
+                    echo "</div>";
                 }
-                else{
-                    printf("Connect failed: %s\n", $mysqli->connect_error);
-                    exit();
+                else {
+                    echo "No result";
                 }
-                $mysqli->close();
-			?>
-        </select>
-        <button type="submit">Submit</button>
-    </form>
+            }
+            else {
+                printf("Connect failed: %s\n", $mysqli->connect_error);
+                exit();
+            }
+        ?>
 </body>
-</html> -->
+</html>
