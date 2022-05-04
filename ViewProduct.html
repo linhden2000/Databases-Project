@@ -59,7 +59,11 @@
   </head>
   <body>
     <div>
-        <h1><a href="Admin.html">Admin Page</a></h1>
+        <form>
+            <input type="button" value="Go back to home" onclick="history.back()">
+           </form>
+           
+        <!-- <h1><a href="Admin.html">Admin Page</a></h1> -->
         <h1>Current Products</h1>
         <?php 
             $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493"); 

@@ -36,13 +36,26 @@
         </style>
 </head>
 <body>
+    <h1> Welcome, 
+        <?php
+        session_start();
+        if (isset($_SESSION['loggedin'])) {
+            echo $_SESSION['id'];
+        }
+        else
+        {
+            echo " guest";
+        }
+        ?>
+
+    </h1>
     <div class="topnav">
         <a href="index.html">Index</a>
         <a href="ViewUsers.php">View Users</a>
-        <a href="ViewShipment.html">View Shipments</a>
+        <a href="ViewOrder.html">View Orders</a>
         <a href="ViewProduct.html">View Products</a>
-        <a href="Dashboard.html">Dashboard</a>
-        <a href="DeletePost.html">Delete Post</a>
+        <a href="Dashboard.php">Dashboard</a>
+        <a href="logout.php">Logout</a>
     </div>
 
 </body>

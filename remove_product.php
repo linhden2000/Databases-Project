@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Shipment</title>
+  <meta charset="utf-8">
 </head>
+
 <body>
-<?php
+  <?php
   ini_set('display_errors', 1);
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
@@ -22,19 +22,21 @@
   }
   // Insert product to the Products table
   session_start();
-  $oid = $_POST['oid'];
-  $status= $_POST ['status'];
-    $sql = "UPDATE ORDERS SET STATUS='$status' WHERE OID=$oid";
+  $pid = $_SESSION['pid'];
+
+    $sql = "DELETE FROM PRODUCTS WHERE PID=$pid";
     if ($mysqli->query($sql) === TRUE) {
-        echo "<p>Order status has has been updated</p>";
+        echo "<p>Product has has been removed</p>";
         } else {
-        echo "<p>Error, order status could not be changed</p>";
+        echo "<p>Error, Product could not be removed</p>";
         }
   
   $mysqli->close();
 
   ?>
-  <br><a href='Admin.html'>Back to Admin Home </a>
+
+<br><a href='Admin.html'>Back to Admin Home </a>
 
 </body>
+
 </html>

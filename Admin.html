@@ -39,13 +39,52 @@
         .container {
           padding: 16px;
         }
+
+        .topnav {
+          overflow: hidden;
+          background-color: #333;
+        }
+
+        .topnav a {
+          float: left;
+          color: #f2f2f2;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 17px;
+        }
+
+        .topnav a:hover {
+          background-color: #ddd;
+          color: black;
+        }
+
+        .topnav a.active {
+          background-color: #4CAF50;
+          color: white;
+        }
   </style>
   </head>
   <body>
-    <h1>Admin Page</h1>
-    <a href="ViewProduct.html">View Your Products</a>
-    <br> <br>
-    <a href="ViewShipment.html">Track and View Current Shipments</a>
+    
+    <div class="topnav">
+        <a href="ViewProduct.html">View Your Products</a>
+        <a href="ViewOrder.html">Track and View Current Orders</a>
+        <a href="edit_products.html">Edit/Remove Listing</a>
+        <a href="logout.php">Logout</a>
+    </div>
+    <h1>Admin Page: Welcome, 
+        <?php
+        session_start();
+        if (isset($_SESSION['loggedin'])) {
+            echo $_SESSION['id'];
+        }
+        else
+        {
+            echo " guest";
+        }
+        ?>
+    </h1>
     <!-- Admin's current products -->
     <h2>Add listing</h2>
     <!-- Admin's add product to sell -->
@@ -70,7 +109,5 @@
         <button type="submit">Add listing</button>
       </div>
     </form>
-    <br>
-    <a href="ViewShipment.html">Track and View Current Sh</a>
   </body>
 </html>
