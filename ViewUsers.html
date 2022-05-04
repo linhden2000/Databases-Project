@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Current User</title>
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        form {border: 3px solid #f1f1f1;}
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+          }
+          
+          button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+          }
+          
+          button:hover {
+            opacity: 0.8;
+          }
+          
+          .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+          }
+          
+          .container {
+            padding: 16px;
+          }
+    </style>
+</head>
+<body>
+    <h1>View Current User</h1>
+        <div class="container">
+                <?php
+                $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493"); 
+                if (!$mysqli->connect_errno) {
+                        session_start();
+                        if($_SESSION['admin'])
+                        {
+                            $query = "SELECT * FROM USERS";
+                        }
+                        else
+                        {
+                            //$query = "SELECT * FROM USERS";
+                            $email = $_SESSION['id'];
+                            $query = "SELECT * FROM USERS WHERE UID in (SELECT USERS.UID FROM USERS WHERE USERS.EMAIL='$email')";
+                        }
+                        if ($result = $mysqli->query($query)) {
+                            echo "<table border='1'><tr><th>User ID</th><th>Name</th><th>Email</th><th>Phone Number</th><th>Address</th><th>Credit Card</th></tr>";
+                                while($row = $result->fetch_assoc())
+                                {
+                                    $text = "<tr><td>" . $row["UID"] . "</td><td>" . $row["NAME"] . "</td>";
+                                    echo $text . "<td>" . $row["EMAIL"] . "</td><td>" . $row["PHONENUM"] . "</td>
+                                    <td>" . $row["ADDRESS"] . "</td><td>" . $row["CREDITCARD"] . "</td></tr>";
+                                }
+                                echo "</table><br><br> ";
+                                $result->free();
+                        }
+                    }
+                    else{
+                        printf("Connect failed: %s\n", $mysqli->connect_error);
+                        exit();
+                    }
+                    $mysqli->close();
+                ?>
+     
+        </div>
+        <?php
+        $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
+
+        if ($mysqli->connect_errno) {
+        printf("Connect failed: %s\n", $mysqli->connect_error);
+        exit();
+        }
+        session_start();
+        if($_SESSION['admin'])
+        {
+            echo "<h3>Select an order from the drop down list below to update</h3>";
+            echo "<form action='ViewUsers.php' method='post' >";
+            echo "<select name='uid' id='uid' required>";
+            
+            
+            $data = "SELECT * FROM USERS";
+            if ($result = $mysqli->query($data)) {
+                while ($row = $result->fetch_assoc()) {
+    
+                    echo "<option value='" . $row["UID"] . "'>User ID: " . $row["UID"] .  "</option>";
+                }
+                echo "</select>";
+    
+                $result->free();
+            }
+        }
+        
+        $mysqli->close();
+    ?>
+
+        <br><br>
+        <div class="container" style="background-color:#f1f1f1">
+            <form>
+                <input type="button" value="Go back to home" onclick="history.back()">
+               </form>
+        </div> 
+        
+    <!-- </form> -->
+</body>
+</html>

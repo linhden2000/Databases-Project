@@ -3,43 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Users</title>
-    <style>
-        body {
-          margin: 0;
-          font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .topnav {
-          overflow: hidden;
-          background-color: #333;
-        }
-
-        .topnav a {
-          float: left;
-          color: #f2f2f2;
-          text-align: center;
-          padding: 14px 16px;
-          text-decoration: none;
-          font-size: 17px;
-        }
-
-        .topnav a:hover {
-          background-color: #ddd;
-          color: black;
-        }
-
-        .topnav a.active {
-          background-color: #4CAF50;
-          color: white;
-        }
-        </style>
+    <title>View Current User</title>
 </head>
 <body>
-    <div class="topnav">
-        <a href="home.html">Home</a>
-    </div>
+    
     <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
         $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
         // Check connection
         if($mysqli -> connect_errno){
@@ -47,6 +18,12 @@
             exit();
         }
         else{
+            session_start();
+            $uid = $_POST['uid'];
+            $name= $_POST ['name'];
+            $email = $_POST['email'];
+            $phonenum= $_POST ['phonenum'];
+            $adress = $_POST['address'];
             $query = "SELECT NAME, EMAIL, PHONENUM, ADDRESS from USERS ORDER by UID ASC";
             if ($result = $mysqli->query($query)) {
                 /* fetch associative array */
