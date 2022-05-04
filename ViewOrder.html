@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Posts</title>
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        form {border: 3px solid #f1f1f1;}
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+          }
+          
+          button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+          }
+          
+          button:hover {
+            opacity: 0.8;
+          }
+          
+          .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+          }
+          
+          .container {
+            padding: 16px;
+          }
+    </style>
+</head>
+<body>
+    <h1>View Current Orders</h1>
+    <form action="ViewOrder.php" method="POST">
+        <div class="container">
+            <label for="OID">Choose the order ID</label>
+            <!-- <select name="OID"> -->
+                <?php
+                $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493"); 
+                if (!$mysqli->connect_errno) {
+                        session_start();
+                        if($_SESSION['admin'])
+                        {
+                            $query = "SELECT * FROM ORDERS";
+                        }
+                        else
+                        {
+                            $query = "SELECT * FROM ORDERS";
+                            //$query = "SELECT * FROM ORDERS WHERE OID in (SELECT ORDERS.OID FROM ORDERS, BUY, USER WHERE USER.EMAIL='$_SESSION['id']' and ORDERS.OID = BUY.OID and BUY.UID = USER.UID)";
+                        }
+                        if ($result = $mysqli->query($query)) {
+                            echo "<table border='1'><tr><th>Order ID</th><th>Price</th><th>Status</th></tr>";
+                                while($row = $result->fetch_assoc())
+                                {
+                                    $text = "<tr><td>" . $row["OID"] . "</td><td>" . $row["PRICE"] . "</td>";
+                                    echo $text . "<td>" . $row["STATUS"] . "</td></tr>";
+                                }
+                                echo "</table><br><br> ";
+                                $result->free();
+                        }
+                    }
+                    else{
+                        printf("Connect failed: %s\n", $mysqli->connect_error);
+                        exit();
+                    }
+                    $mysqli->close();
+                ?>
+            <!-- </select> -->
+            <!-- <button type="submit">Submit</button> -->
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <form>
+                <input type="button" value="Go back to home" onclick="history.back()">
+               </form>
+        </div> 
+        
+    </form>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+    <head>
+    </head>
+<body>
+    <h1>Current Orders</h1>
+    <?php
+    $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
+
+    if ($mysqli->connect_errno)
+    {
+        printf("Connect failed: %s\n", $mysqli->connect_error);
+        exit();
+    }
+    $data = "SELECT * FROM PRODUCTS;";
+    if ($result = $mysqli->query($data))
+    {
+      echo "<table border='1'><tr><th>PID</th><th>Name</th><th>Price</th><th>Quantity</th><th>Image</th></tr>";
+        while($row = $result->fetch_assoc())
+		{
+            $text = "<tr><td>" . $row["PID"] . "</td><td>" . $row["NAME"] . "</td>";
+			echo $text . "<td>" . $row["PRICE"] . "</td><td>" . $row["QUANTITY"] . "</td><td>" . $row["IMAGE"] . "</td></tr>";
+		}
+        echo "</table><br><br> ";
+        $result->free();
+    }
+
+    $mysqli->close();
+?>
+    <h2>Select a product from the drop down list below</h2>
+    <form action="edit_products.php" method="post" >
+    <select name="pid" id="pid" required>
+        <?php
+        $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
+
+        if ($mysqli->connect_errno) {
+        printf("Connect failed: %s\n", $mysqli->connect_error);
+        exit();
+        }
+        $data = "SELECT * FROM PRODUCTS";
+        if ($result = $mysqli->query($data)) {
+            while ($row = $result->fetch_assoc()) {
+
+                echo "<option>" . $row["PID"] .  "</option>";
+            }
+            echo "</select>";
+
+            $result->free();
+        }
+        $mysqli->close();
+    ?>
+
+<input type='submit' name='submit' value='Submit'>
+</form>
+
+
+</body>
+</html>
