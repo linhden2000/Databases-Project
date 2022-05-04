@@ -17,7 +17,7 @@
             // Could not get the data that should have been sent.
             exit('Please fill both the username and password fields!');
         }
-    $query = "SELECT EMAIL, PASSWORD, ADDRESS from USERS ORDER by UID ASC";
+    $query = "SELECT EMAIL, PASSWORD, ADDRESS, ADMIN from USERS ORDER by UID ASC";
     $flag = TRUE;
     if ($result = $mysqli->query($query)) {
         while ($row = $result->fetch_assoc()) {
@@ -25,7 +25,11 @@
             {
                 //session_regenerate_id();
                 $_SESSION['loggedin'] = TRUE;
-                $_SESSION['name'] = $_POST['username'];
+                $_SESSION['admin'] = FALSE;
+                if($row["ADMIN"] == 1)
+                {
+                    $_SESSION['admin'] = TRUE;
+                }
                 $_SESSION['id'] = $_POST['username'];
                 $flag = FALSE;
                 // echo "<p> fdjfdjkfd:  " . $row["EMAIL"] . "</p>";

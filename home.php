@@ -6,8 +6,17 @@ error_reporting(E_ALL);
 session_start();
 // If the user is not logged in redirect to the login page...
 if (isset($_SESSION['loggedin'])) {
-	header('Location: https://people.eecs.ku.edu/~m552s493/Databases-Project/home.html');
-	exit;
+    if($_SESSION['admin'])
+    {
+        header('Location: https://people.eecs.ku.edu/~m552s493/Databases-Project/Admin.html');
+	    exit;
+    }
+    else
+    {
+        header('Location: https://people.eecs.ku.edu/~m552s493/Databases-Project/home.html');
+	    exit;
+    }
+	
 }
 else
 {
