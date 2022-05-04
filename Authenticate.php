@@ -5,7 +5,6 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    
         session_start();
         // Change this to your connection info.
         $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
@@ -24,20 +23,23 @@
         while ($row = $result->fetch_assoc()) {
             if($row["EMAIL"] == $_POST['username'] and $row["PASSWORD"] == $_POST['password'])
             {
-                session_regenerate_id();
+                //session_regenerate_id();
                 $_SESSION['loggedin'] = TRUE;
                 $_SESSION['name'] = $_POST['username'];
                 $_SESSION['id'] = $_POST['username'];
+                $flag = FALSE;
                 // echo "<p> fdjfdjkfd:  " . $row["EMAIL"] . "</p>";
                 // echo "<p> fdjfjdfjdsl: " . $row["PASSWORD"] . "</p>";
-                echo "<p> Welcome " . $_SESSION['name'] . "</p>";
-                $flag = FALSE;
+                header('Location: https://people.eecs.ku.edu/~m552s493/Databases-Project/home.php');
+                //echo "<p> Welcome " . $_SESSION['name'] . "</p>";
+                
             }
             // echo "<p> Email:  " . $row["EMAIL"] . "</p>";
             // echo "<p> Password: " . $row["PASSWORD"] . "</p>";
         }
         if($flag)
         {
+            $_SESSION['loggedin'] = FALSE;   
             echo "<p> Incorrect username and/or password! </p>";
         }
         /* free result set */
