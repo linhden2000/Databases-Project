@@ -44,9 +44,8 @@
 </head>
 <body>
     <h1>View Current Orders</h1>
-    <form action="ViewOrder.php" method="POST">
+    <!-- <form action="ViewOrder.php" method="POST"> -->
         <div class="container">
-            <label for="OID">Choose the order ID</label>
             <!-- <select name="OID"> -->
                 <?php
                 $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493"); 
@@ -58,8 +57,9 @@
                         }
                         else
                         {
-                            $query = "SELECT * FROM ORDERS";
-                            //$query = "SELECT * FROM ORDERS WHERE OID in (SELECT ORDERS.OID FROM ORDERS, BUY, USER WHERE USER.EMAIL='$_SESSION['id']' and ORDERS.OID = BUY.OID and BUY.UID = USER.UID)";
+                            //$query = "SELECT * FROM ORDERS";
+                            $email = $_SESSION['id'];
+                            $query = "SELECT * FROM ORDERS WHERE OID in (SELECT ORDERS.OID FROM ORDERS, BUY, USERS WHERE USERS.EMAIL='$email' and ORDERS.OID = BUY.OID and BUY.UID = USERS.UID)";
                         }
                         if ($result = $mysqli->query($query)) {
                             echo "<table border='1'><tr><th>Order ID</th><th>Price</th><th>Status</th></tr>";
@@ -81,13 +81,15 @@
             <!-- </select> -->
             <!-- <button type="submit">Submit</button> -->
         </div>
-
+        <div class="container" style="background-color:#f1f1f1">
+        
+        </div>
         <div class="container" style="background-color:#f1f1f1">
             <form>
                 <input type="button" value="Go back to home" onclick="history.back()">
                </form>
         </div> 
         
-    </form>
+    <!-- </form> -->
 </body>
 </html>
