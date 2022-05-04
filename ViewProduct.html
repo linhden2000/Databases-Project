@@ -1,32 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Products</title>
-</head>
-<body>
-    <h1>Products</h1>
-    <?php
-        $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m553s493");
-        if ($mysqli->connect_errno) {
-            printf("Connect failed: %s\n", $mysqli->connect_error);
-            exit(); 
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body {
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+          align-items: center;
+          text-align: center;
+          justify-content: center;
         }
-        else {
-            $sql = "SELECT PID, Name, Price, Quantity, Image FROM PRODUCTS";
-            echo "Display admin's products";
-            if ($result = $mysqli -> query($sql)) {
-                echo "<table border='1'><tr><th>Product ID </th><th>Product Name</th></tr>";
-                while($row = $result -> fetch_assoc()) {
-                    echo "<tr><td>" . $row["PID"] . "</td><td>" . $row["Name"] . "</td></tr>";
+
+        .topnav {
+          overflow: hidden;
+          background-color: #333;
+        }
+
+        .topnav a {
+          float: left;
+          color: #f2f2f2;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 17px;
+        }
+
+        .topnav a:hover {
+          background-color: #ddd;
+          color: black;
+        }
+
+        .topnav a.active {
+          background-color: #4CAF50;
+          color: white;
+        }
+
+        .container {
+          overflow: hidden;
+          text-align: center;
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .product {
+            border: #333 1px solid;
+            margin: 2%;
+            width: 40%;
+        }
+        .product-img {
+            height: 20%;
+            width: 20%;
+        }
+        </style>
+  </head>
+  <body>
+    <div>
+        <h1><a href="Admin.html">Admin Page</a></h1>
+        <h1>Current Products</h1>
+        <?php 
+            $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493"); 
+            $query = "SELECT PID, NAME, PRICE, QUANTITY, IMAGE FROM PRODUCTS ORDER BY PID ";
+            if(!$mysqli->connect_errno) {
+                if ($result = $mysqli->query($query)) {
+                    echo "<div class='container'>";
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<div class='product'>";
+                        echo "<img class='product-img' src='". $row["IMAGE"] ."'/>";
+                        echo "
+                        <p> Product ID: " . $row["PID"] . "</p>
+                        <p> Name: " . $row["NAME"] . "</p>
+                        <p>Quantity: ". $row["QUANTITY"] ."</p>
+                        <p>Price: $". $row["PRICE"] ."</p>";
+                        echo "</div>";
+                    }
+                    echo "</div>";
                 }
-                echo "</table><br><br>"
-                $result -> free();
+                else {
+                    echo "No result";
+                }
             }
-        }
-        $mysqli->close();
-    ?>                   
-</body>
+            else {
+                printf("Connect failed: %s\n", $mysqli->connect_error);
+                exit();
+            }
+        ?>
+    </div>
+  </body>
 </html>
