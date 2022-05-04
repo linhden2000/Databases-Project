@@ -44,9 +44,7 @@
 </head>
 <body>
     <h1>View Current Orders</h1>
-    <!-- <form action="ViewOrder.php" method="POST"> -->
         <div class="container">
-            <!-- <select name="OID"> -->
                 <?php
                 $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493"); 
                 if (!$mysqli->connect_errno) {
@@ -78,12 +76,49 @@
                     }
                     $mysqli->close();
                 ?>
-            <!-- </select> -->
-            <!-- <button type="submit">Submit</button> -->
+     
         </div>
-        <div class="container" style="background-color:#f1f1f1">
+        <?php
+        $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
+
+        if ($mysqli->connect_errno) {
+        printf("Connect failed: %s\n", $mysqli->connect_error);
+        exit();
+        }
+        session_start();
+        if($_SESSION['admin'])
+        {
+            echo "<h2>Select an order from the drop down list below</h2>";
+            echo "<form action='ViewOrder.php' method='post' >";
+            echo "<select name='oid' id='oid' required>";
+            
+            
+            $data = "SELECT * FROM ORDERS";
+            if ($result = $mysqli->query($data)) {
+                while ($row = $result->fetch_assoc()) {
+    
+                    echo "<option value='" . $row["OID"] . "'>Order ID: " . $row["OID"] .  "</option>";
+                }
+                echo "</select>";
+    
+                $result->free();
+            }
+            echo "<br><br>";
+            echo "<p>Update status:</p>";
+            echo "<input type='radio' id='INCOMPLETE' name='status' value='INCOMPLETE'>";
+            echo "<label for='INCOMPLETE'>INCOMPLETE</label><br>";
+            echo "<input type='radio' id='SHIPPED' name='status' value='SHIPPED'>";
+            echo "<label for='SHIPPED'>SHIPPED</label><br>";
+            echo "<input type='radio' id='COMPLETE' name='status' value='COMPLETE'>";
+            echo "<label for='COMPLETE'>COMPLETE</label><br>";
+            echo "<br><br><input type='submit' name='submit' value='Submit'>";
+            echo "</form>";
+        }
         
-        </div>
+        $mysqli->close();
+    ?>
+
+        <br><br>
         <div class="container" style="background-color:#f1f1f1">
             <form>
                 <input type="button" value="Go back to home" onclick="history.back()">
