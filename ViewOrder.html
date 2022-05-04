@@ -55,9 +55,9 @@
                         }
                         else
                         {
-                            //$query = "SELECT * FROM ORDERS";
+                            $query = "SELECT * FROM ORDERS";
                             $email = $_SESSION['id'];
-                            $query = "SELECT * FROM ORDERS WHERE OID in (SELECT ORDERS.OID FROM ORDERS, BUY, USERS WHERE USERS.EMAIL='$email' and ORDERS.OID = BUY.OID and BUY.UID = USERS.UID)";
+                            //$query = "SELECT * FROM ORDERS WHERE OID in (SELECT ORDERS.OID FROM ORDERS, BUY, USERS WHERE USERS.EMAIL='$email' and ORDERS.OID = BUY.OID and BUY.UID = USERS.UID)";
                         }
                         if ($result = $mysqli->query($query)) {
                             echo "<table border='1'><tr><th>Order ID</th><th>Price</th><th>Status</th></tr>";
