@@ -31,6 +31,7 @@
                 // echo "<p> fdjfdjkfd:  " . $row["EMAIL"] . "</p>";
                 // echo "<p> fdjfjdfjdsl: " . $row["PASSWORD"] . "</p>";
                 header('Location: https://people.eecs.ku.edu/~m552s493/Databases-Project/home.php');
+                exit;
                 //echo "<p> Welcome " . $_SESSION['name'] . "</p>";
                 
             }
@@ -45,6 +46,7 @@
         /* free result set */
         $result->free();
        }
+       echo "<a href='index.html'>Try again</a>";
         // if ($stmt = $mysqli->prepare('SELECT EMAIL, PASSWORD FROM USERS WHERE username = ?')) {
         //     // Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
         //     $stmt->bind_param('s', $_POST['username']);
