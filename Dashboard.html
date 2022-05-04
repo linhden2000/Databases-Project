@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -41,48 +41,38 @@
         </style>
 </head>
 <body>
+  
     <div class="topnav">
         <a href="home.html">Home</a>
     </div>
-
+    <h1>Dashboard</h1>
     <form action="Dashboard.php" method="POST">
-      <div class="product">
-        <div>
-          <img src="img1.jpg">
-        </div>
-        <p>Product Name: Squishy Toys</p>
-        <p>Seller Name: Toy Co</p>
-        <p>Price: $10</p>
-      </div>
-      <div class="product">
-        <div>
-          <img src="img1.jpg">
-        </div>
-        <p>Product Name: Squishy Toys</p>
-        <p>Seller Name: Toy Co</p>
-        <p>Price: $10</p>
-      </div>
-        <label for="username">Choose User to view posts</label>
-        <select name="username">
-            <?php
-                $mysqli = new mysqli("mysql.eecs.ku.edu", "linhnguyen", "aadaeR4k", "linhnguyen");
-				if (!$mysqli->connect_errno) {
-				    $query = "SELECT user_id FROM Users ORDER BY user_id ASC";
-					if ($result = $mysqli->query($query)) {
-						while ($row = $result->fetch_assoc()) {
-							echo "<option value=\"" . $row["user_id"] . "\">" . $row["user_id"] . "</option>";
-						}
-						$result->free();
-					}
-                }
-                else{
-                    printf("Connect failed: %s\n", $mysqli->connect_error);
-                    exit();
-                }
-                $mysqli->close();
-			?>
-        </select>
-        <button type="submit">Submit</button>
+      
     </form>
+    <?php
+        $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493");
+        // Check connection
+        if($mysqli -> connect_errno){
+            printf("Connect failed: %s\n", $mysqli->connect_error);
+            exit();
+        }
+        else{
+            $query = "SELECT NAME, PRICE, QUANTITY, IMAGE from PRODUCTS ORDER by PID ASC";
+            if ($result = $mysqli->query($query)) {
+                /* fetch associative array */
+                while ($row = $result->fetch_assoc()) {
+                    echo '<img src="img1.jpg"/>';
+                    echo "<p>  Product Name: " . $row["NAME"] . "</p>";
+                    echo "<p> Price: " . $row["PRICE"] . "</p>";
+                    echo "<p> Quantity: " . $row["QUANTITY"] . "</p>";
+                    echo "<input type='submit' name='add' value='Add'>";
+                }
+                /* free result set */
+                $result->free();
+               }
+        }
+        $mysqli->close();
+    ?>
+    
 </body>
-</html> -->
+</html>

@@ -106,15 +106,15 @@ span.psw {
 
 <h2>Login Form</h2>
 
-<form action="/action_page.php" method="post">
+<form action="index.php" method="post">
   <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username">
+    <label for="username"><b>Username</b></label>
+    <input type="text" name="username"  placeholder="Enter Username" id="username" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password">
+    <label for="password"><b>Password</b></label>
+    <input type="password" name ="password" placeholder="Enter Password" id="password" required>
 
-    <button type="button"><a href="Dashboard.php">Login</a></button>
+    <button type="button"><a href="Dashboard.html">Login</a></button>
   </div>
 
   <div class="container" style="background-color:#f1f1f1">
@@ -125,3 +125,6 @@ span.psw {
 
 </body>
 </html>
+
+
+

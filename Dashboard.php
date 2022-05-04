@@ -55,6 +55,7 @@
                     echo "<p>  Product Name: " . $row["NAME"] . "</p>";
                     echo "<p> Price: " . $row["PRICE"] . "</p>";
                     echo "<p> Quantity: " . $row["QUANTITY"] . "</p>";
+                    echo "<button type="submit">Submit</button>";
                 }
                 /* free result set */
                 $result->free();
