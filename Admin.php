@@ -43,6 +43,8 @@
   <?php
   }
   ?>
+
+<br><a href='Admin.html'>Back to Admin Home </a>
 </body>
 
 </html>
