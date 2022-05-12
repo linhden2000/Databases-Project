@@ -22,6 +22,10 @@
   }
   // Insert product to the Products table
   session_start();
+  $user_email = 'guest';
+  if (isset($_SESSION['loggedin'])) {
+    $user_email = $_SESSION['id'];
+  }
   $oid = $_POST['oid'];
   $status= $_POST ['status'];
     $sql = "UPDATE ORDERS SET STATUS='$status' WHERE OID=$oid";

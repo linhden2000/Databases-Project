@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Posts</title>
+    <title>View Order</title>
     <style>
         body {font-family: Arial, Helvetica, sans-serif;}
         form {border: 3px solid #f1f1f1;}
@@ -46,18 +46,20 @@
     <h1>View Current Orders</h1>
         <div class="container">
                 <?php
+                
                 $mysqli = new mysqli("mysql.eecs.ku.edu", "m552s493", "chahcee4", "m552s493"); 
                 if (!$mysqli->connect_errno) {
                         session_start();
+                        
                         if($_SESSION['admin'])
                         {
                             $query = "SELECT * FROM ORDERS";
                         }
                         else
                         {
-                            $query = "SELECT * FROM ORDERS";
+                            //$query = "SELECT * FROM ORDERS";
                             $email = $_SESSION['id'];
-                            //$query = "SELECT * FROM ORDERS WHERE OID in (SELECT ORDERS.OID FROM ORDERS, BUY, USERS WHERE USERS.EMAIL='$email' and ORDERS.OID = BUY.OID and BUY.UID = USERS.UID)";
+                            $query = "SELECT * FROM ORDERS WHERE EMAIL = '$email' " ;
                         }
                         if ($result = $mysqli->query($query)) {
                             echo "<table border='1'><tr><th>Order ID</th><th>Price</th><th>Status</th></tr>";
